@@ -3,37 +3,49 @@ const addTaskButton = document.querySelector(".task-row-wrapper button");
 const incompleteTaskList = document.getElementById("incompleteTasks");
 const completedTaskList = document.getElementById("completed-tasks");
 
-const createTaskItem = function (taskText) {
-  const taskItem = document.createElement("li");
-
-  const checkbox = document.createElement("input");
+const createTaskLabel = function (taskText) {
   const label = document.createElement("label");
-  const editInput = document.createElement("input");
-  const editButton = document.createElement("button");
-
-  const deleteButton = document.createElement("button");
-  const deleteIcon = document.createElement("img");
-
   // innerText, not innerHTML: the task text must never be parsed as markup.
   label.innerText = taskText;
   label.className = "task";
+  return label;
+};
 
-  checkbox.type = "checkbox";
+const createEditInput = function () {
+  const editInput = document.createElement("input");
   editInput.type = "text";
   editInput.className = "task";
+  return editInput;
+};
 
+const createEditButton = function () {
+  const editButton = document.createElement("button");
   editButton.innerText = "Edit";
   editButton.className = "edit";
+  return editButton;
+};
 
+const createDeleteButton = function () {
+  const deleteButton = document.createElement("button");
+  const deleteIcon = document.createElement("img");
   deleteButton.className = "delete";
   deleteIcon.src = "./remove.svg";
   deleteButton.appendChild(deleteIcon);
+  return deleteButton;
+};
 
-  taskItem.appendChild(checkbox);
-  taskItem.appendChild(label);
-  taskItem.appendChild(editInput);
-  taskItem.appendChild(editButton);
-  taskItem.appendChild(deleteButton);
+const createTaskItem = function (taskText) {
+  const taskItem = document.createElement("li");
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+
+  taskItem.append(
+    checkbox,
+    createTaskLabel(taskText),
+    createEditInput(),
+    createEditButton(),
+    createDeleteButton(),
+  );
   return taskItem;
 };
 
